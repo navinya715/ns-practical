@@ -1,0 +1,16 @@
+clc;
+close all;
+clear all;
+% Define symbols and their respective probabilities
+symbols = 1:6;
+p = [0.1, 0.2, 0.2, 0.2, 0.1, 0.2];
+% Create Huffman dictionary and calculate average length
+[dict, avglen] = huffmandict(symbols, p);
+% Generate a random signal based on the probabilities
+actualsig = randsrc(100, 1, [symbols; p]);
+% Encode the signal
+code = huffmanenco(actualsig, dict);
+% Decode the signal
+decoded = huffmandeco(code, dict);
+% Calculate Entropy (H)
+H = -sum(p .* log2(p));
